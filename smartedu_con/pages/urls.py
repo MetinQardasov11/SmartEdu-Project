@@ -6,4 +6,6 @@ app_name = 'pages'
 urlpatterns = [
     path('', index, name='index'),
     path('about/', about, name='about'),
+    path('teachers/', teachers, name='teachers'),
+    path('contact/', contact, name='contact'),
 ]
