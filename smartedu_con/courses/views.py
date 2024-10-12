@@ -10,3 +10,12 @@ def course_list(request):
         'courses': courses
     }
     return render(request, 'courses.html', context)
+
+def course_detail(request, category_slug, category_id):
+    course = Course.objects.get(id=category_id, category__slug=category_slug)
+    
+    context = {
+        'course': course
+    }
+    return render(request, 'course_detail.html', context)
+
