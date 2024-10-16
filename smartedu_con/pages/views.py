@@ -20,11 +20,6 @@ class IndexView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'about.html'
-    
-
-def teachers(request):
-    return render(request, 'teachers.html')
-
 
 def contact(request):
     return render(request, 'contact.html')

@@ -1,4 +1,5 @@
 from django.db import models
+from teachers.models import Teacher
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True)
@@ -28,6 +29,7 @@ class Course(models.Model):
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
     tags = models.ManyToManyField(Tag, blank=True, null=True)
     description = models.TextField()
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to='courses/%Y/%m/%d', default='courses/default_course_img.png')
     date = models.DateTimeField(auto_now=True)
     available = models.BooleanField(default=True)
@@ -37,4 +39,4 @@ class Course(models.Model):
     
     class Meta:
         verbose_name = 'Course'
-        verbose_name_plural = 'Courses'
+        verbose_name_plural = 'Courses' 
