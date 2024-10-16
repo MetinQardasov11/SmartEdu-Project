@@ -73,7 +73,7 @@
 						<ul>
 							{% for category in categories %}
 							    <li>
-                                    <a href="{% url 'courses:course_by_category' category.slug %}">{{ category.name }}</a>
+                                    <a href="{% url 'courses:course_by_category' category.slug %}">{% if category.slug in request.path %} <b>{{ category.name }}</b> {% else %} {{ category.name }} {% endif %}</a>
                                 </li>
                             {% endfor %}
 						</ul>
