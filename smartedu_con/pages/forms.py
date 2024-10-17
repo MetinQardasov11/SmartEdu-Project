@@ -1,7 +1,10 @@
 from django import forms
 from .models import Contact
 
-class ContactForm(forms.Form):
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['first_name', 'last_name', 'email', 'phone', 'message']
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'First Name',
@@ -29,12 +32,3 @@ class ContactForm(forms.Form):
         'rows': 4,
     }))
     
-    def save(self):
-        contact = Contact(
-            first_name=self.cleaned_data['first_name'],
-            last_name=self.cleaned_data['last_name'],
-            email=self.cleaned_data['email'],
-            phone=self.cleaned_data['phone'],
-            message=self.cleaned_data['message'],
-        )
-        contact.save()

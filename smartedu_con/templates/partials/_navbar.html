@@ -1,6 +1,6 @@
 {% load static %}
     
-	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade show" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header tit-up">
@@ -105,7 +105,8 @@
 						<li class="nav-item {% if 'contact' in request.path %} active {% endif %}"><a class="nav-link" href="{% url 'pages:contact' %}">Contact</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log orange" href="#" data-toggle="modal" data-target="#login"><span>Book Now</span></a></li>
+                        <li><a class="hover-btn-new log orange mr-2" href="{% url 'accounts:login' %}"><span><i class="fa fa-sign-in"></i></span></a></li>
+                        <li><a class="hover-btn-new log orange" href="{% url 'accounts:register' %}"><span><i class="fa fa-user-plus"></i></span></a></li>
                     </ul>
 				</div>
                 </div>
