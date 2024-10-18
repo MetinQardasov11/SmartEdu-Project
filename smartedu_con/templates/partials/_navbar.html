@@ -107,7 +107,7 @@
 					<ul class="nav navbar-nav navbar-right">
 
                         {% if request.user.is_authenticated %}
-                            <li><a class="hover-btn-new log orange mr-2" href="{% url 'accounts:dashboard' %}"><span><i class="fa fa-user"></i></span></a></li>
+                            <li><a class="hover-btn-new log orange mr-2" href="{% url 'accounts:dashboard' %}"><span><i class="fa fa-user mr-2"></i></span><span>{{ request.user.username }}</span></a></li>
                             <li><a class="hover-btn-new log orange" href="{% url 'accounts:logout' %}"><span><i class="fa fa-sign-out"></i></span></a></li>
                         {% else %}
                             <li><a class="hover-btn-new log orange mr-2" href="{% url 'accounts:login' %}"><span><i class="fa fa-sign-in"></i></span></a></li>

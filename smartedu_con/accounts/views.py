@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -34,9 +35,9 @@ def login_view(request):
                     login(request, user)
                     return redirect('pages:index')
                 else:
-                    messages.warning(request, 'Your account is not active.')
+                    messages.info(request, 'Your account is not active.')
             else:
-                messages.warning(request, 'Invalid login credentials.')
+                messages.info(request, 'Invalid login credentials.')
     else:
         form = LoginForm()
     
@@ -49,5 +50,10 @@ def logout_view(request):
     logout(request)
     return redirect('pages:index')
 
+@login_required(login_url='accounts:login')
 def dashboard_view(request):
-    return render(request, 'dashboard.html')
+    current_user = request.user
+    context = {
+        'current_user': current_user
+    }
+    return render(request, 'dashboard.html', context)
