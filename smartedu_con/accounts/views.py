@@ -3,8 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth.decorators import login_required
-
-# Create your views here.
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+from courses.models import Course
 
 def register_view(request):
     if request.method == "POST":
@@ -33,6 +34,7 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    messages.success(request, 'Login successful.')
                     return redirect('pages:index')
                 else:
                     messages.info(request, 'Your account is not active.')
@@ -53,7 +55,21 @@ def logout_view(request):
 @login_required(login_url='accounts:login')
 def dashboard_view(request):
     current_user = request.user
+    
+    courses = current_user.courses_joined.all()
     context = {
-        'current_user': current_user
+        'current_user': current_user,
+        'courses': courses
     }
+    
     return render(request, 'dashboard.html', context)
+
+
+
+def enroll_course(request):
+    course_id = request.POST['course_id']
+    user_id = request.POST['user_id']
+    course = Course.objects.get(id=course_id)
+    user = User.objects.get(id=user_id)
+    course.students.add(user)
+    return redirect('accounts:dashboard')
