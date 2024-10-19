@@ -26,7 +26,7 @@ class Tag(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     tags = models.ManyToManyField(Tag, blank=True, null=True)
     students = models.ManyToManyField(User, blank=True, null=True, related_name='courses_joined')
     description = models.TextField()
